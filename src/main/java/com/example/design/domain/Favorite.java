@@ -1,4 +1,4 @@
-package com.example.design;
+package com.example.design.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Comment;
 
 @Entity
@@ -24,7 +25,8 @@ public class Favorite extends BaseTime {
     @Column(name = "favorite_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = Member.class, fetch = FetchType.LAZY)
+    @BatchSize(size = 1)
     @JoinColumn(name="member_id")
     private Member member;
 

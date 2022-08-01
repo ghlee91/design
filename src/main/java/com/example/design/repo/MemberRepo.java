@@ -1,6 +1,6 @@
 package com.example.design.repo;
 
-import com.example.design.Member;
+import com.example.design.domain.Member;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
