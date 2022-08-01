@@ -1,4 +1,4 @@
-package com.example.design;
+package com.example.design.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

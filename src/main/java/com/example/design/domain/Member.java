@@ -1,5 +1,8 @@
-package com.example.design;
+package com.example.design.domain;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,15 +11,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Comment;
 
 @Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member extends BaseTime{
+@Builder
+@ToString
+public class Member extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,4 +42,4 @@ public class Member extends BaseTime{
     @Comment("본인확인 완료여부")
     private GlobalYn confirm;
 
-}
+ }

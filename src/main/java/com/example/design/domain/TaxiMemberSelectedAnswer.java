@@ -1,4 +1,4 @@
-package com.example.design;
+package com.example.design.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +12,7 @@ import org.hibernate.annotations.Comment;
 
 @Entity
 @Getter
-public class TaxiMemberSelectedAnswer extends BaseTime{
+public class TaxiMemberSelectedAnswer extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

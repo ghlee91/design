@@ -1,6 +1,5 @@
-package com.example.design;
+package com.example.design.domain;
 
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,15 +11,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Setter;
 import org.hibernate.annotations.Comment;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaxiServiceFee extends BaseTime{
+public class TaxiServiceFee extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

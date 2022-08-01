@@ -1,12 +1,9 @@
-package com.example.design;
+package com.example.design.domain;
 
 import java.time.LocalDateTime;
-import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.Comment;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
