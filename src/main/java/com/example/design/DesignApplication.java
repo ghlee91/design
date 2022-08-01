@@ -4,8 +4,10 @@ import com.example.design.repo.MemberRepo;
 import java.util.Optional;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 @RequiredArgsConstructor
@@ -20,4 +22,11 @@ public class DesignApplication {
 
     }
 
+    @Bean
+    public ModelMapper modelMapper() {
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration()
+                   .setSkipNullEnabled(true);
+        return modelMapper;
+    }
 }
