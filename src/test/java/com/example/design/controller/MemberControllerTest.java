@@ -127,7 +127,7 @@ class MemberControllerTest {
         this.mockMvc.perform(put("/api/member").content(content)
                                                .accept(MEDIA_TYPE_JSON_UTF8)
                                                .contentType(MEDIA_TYPE_JSON_UTF8))
-                    .andExpect(status().isCreated())
+                    .andExpect(status().isOk())
                     .andExpect(result -> memberRepo.findById(1L)
                                                    .orElseThrow()
                                                    .getPassword()

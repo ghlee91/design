@@ -43,7 +43,7 @@ public class MemberController {
     public ResponseEntity updateMember(@RequestBody MemberUpdateRequest memberUpdateRequest) {
         log.info("{}", memberUpdateRequest);
         MemberResponse member = memberService.updateMember(memberUpdateRequest);
-        return ResponseEntity.status(HttpStatus.CREATED)
+        return ResponseEntity.status(HttpStatus.OK)
                              .body(member);
     }
 

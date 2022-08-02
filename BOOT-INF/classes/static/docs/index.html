@@ -447,7 +447,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#Member">createMember api</a></li>
-<li><a href="#_createmember_api">createMember api</a></li>
+<li><a href="#_updatemember_api">updateMember api</a></li>
 </ul>
 </div>
 </div>
@@ -599,10 +599,10 @@ Content-Length: 57
 </div>
 </div>
 <div class="sect1">
-<h2 id="_createmember_api"><a class="link" href="#_createmember_api">createMember api</a></h2>
+<h2 id="_updatemember_api"><a class="link" href="#_updatemember_api">updateMember api</a></h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_createmember_api_http_request"><a class="link" href="#_createmember_api_http_request">HTTP request</a></h3>
+<h3 id="_updatemember_api_http_request"><a class="link" href="#_updatemember_api_http_request">HTTP request</a></h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /api/member HTTP/1.1
@@ -619,7 +619,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect2">
-<h3 id="_createmember_api_request_fields"><a class="link" href="#_createmember_api_request_fields">Request fields</a></h3>
+<h3 id="_updatemember_api_request_fields"><a class="link" href="#_updatemember_api_request_fields">Request fields</a></h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -648,7 +648,7 @@ Host: localhost:8080
 </table>
 </div>
 <div class="sect2">
-<h3 id="_createmember_api_curl_request"><a class="link" href="#_createmember_api_curl_request">Curl request</a></h3>
+<h3 id="_updatemember_api_curl_request"><a class="link" href="#_updatemember_api_curl_request">Curl request</a></h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/api/member' -i -X PUT \
@@ -662,7 +662,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect2">
-<h3 id="_createmember_api_request_body"><a class="link" href="#_createmember_api_request_body">Request body</a></h3>
+<h3 id="_updatemember_api_request_body"><a class="link" href="#_updatemember_api_request_body">Request body</a></h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
@@ -673,10 +673,10 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect2">
-<h3 id="_createmember_api_http_response"><a class="link" href="#_createmember_api_http_response">HTTP response</a></h3>
+<h3 id="_updatemember_api_http_response"><a class="link" href="#_updatemember_api_http_response">HTTP response</a></h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 201 Created
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
 Content-Length: 60
 
@@ -689,7 +689,7 @@ Content-Length: 60
 </div>
 </div>
 <div class="sect2">
-<h3 id="_createmember_api_response_body"><a class="link" href="#_createmember_api_response_body">Response body</a></h3>
+<h3 id="_updatemember_api_response_body"><a class="link" href="#_updatemember_api_response_body">Response body</a></h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
@@ -701,7 +701,7 @@ Content-Length: 60
 </div>
 </div>
 <div class="sect2">
-<h3 id="_createmember_api_response_fields"><a class="link" href="#_createmember_api_response_fields">Response fields</a></h3>
+<h3 id="_updatemember_api_response_fields"><a class="link" href="#_updatemember_api_response_fields">Response fields</a></h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -740,7 +740,7 @@ Content-Length: 60
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-08-02 09:53:54 +0900
+Last updated 2022-08-02 10:08:52 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
