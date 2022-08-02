@@ -28,7 +28,7 @@ public class MemberController {
         System.out.println(memberRequest.getPassword());
         System.out.println(memberRequest.getName());
         System.out.println(memberRequest.getConfirm());
-        System.out.println("ㅎㅎ");
+        System.out.println("ㅎgㅎ");
         return "헬로 월드";
     }
 
