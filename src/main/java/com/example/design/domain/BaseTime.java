@@ -1,8 +1,11 @@
 package com.example.design.domain;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import lombok.Getter;
 import org.hibernate.annotations.Comment;
 import org.springframework.data.annotation.CreatedBy;
@@ -21,15 +24,21 @@ public abstract class BaseTime {
     private String createdBy;
 
     @CreatedDate
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @Comment("생성일")
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
     @LastModifiedBy
     private String modifiedBy;
 
     @LastModifiedDate
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @Comment("수정일")
-    private LocalDateTime modifiedAt = LocalDateTime.now();
+    private LocalDateTime modifiedAt;
+
+    @PrePersist
+    public void createdAt() {
+        System.out.println(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        this.createdAt= LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        this.modifiedAt= LocalDateTime.parse(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+     }
 }
+

@@ -5,6 +5,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -16,6 +17,7 @@ import com.example.design.domain.GlobalYn;
 import com.example.design.domain.Member;
 import com.example.design.dto.member.MemberDTO;
 import com.example.design.repo.MemberRepo;
+import com.example.design.vo.member.MemberListRequest;
 import com.example.design.vo.member.MemberRequest;
 import com.example.design.vo.member.MemberUpdateRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,6 +26,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
@@ -156,5 +160,45 @@ class MemberControllerTest {
                         )
                     )
                     .andDo(print());
+    }
+
+    @Test
+    void selectAllMember() throws Exception {
+
+
+        PageRequest pageRequest = PageRequest.of(0,20);
+
+        String content = objectMapper.writeValueAsString(pageRequest);
+
+        this.mockMvc.perform(get("/api/member").content(content)
+                                               .accept(MEDIA_TYPE_JSON_UTF8)
+                                               .contentType(MEDIA_TYPE_JSON_UTF8))
+                    .andExpect(status().isOk())
+                    .andExpect(result -> memberRepo.findAll(pageRequest))
+                    .andDo(document("{method-name}", preprocessRequest(prettyPrint()),
+                            preprocessResponse(prettyPrint()),
+                            PayloadDocumentation.requestFields(
+                                PayloadDocumentation.fieldWithPath("pageSize")
+                                                    .description("페이지 사이즈")
+                                                    .type(JsonFieldType.NUMBER),
+                                PayloadDocumentation.fieldWithPath("pageNumber")
+                                                    .description("페이지 넘버")
+                                                    .type(JsonFieldType.NUMBER)
+                            ),
+                            PayloadDocumentation.responseFields(
+                                PayloadDocumentation.fieldWithPath("id")
+                                                    .description("아이디")
+                                                    .type(JsonFieldType.NULL),
+                                PayloadDocumentation.fieldWithPath("name")
+                                                    .description("이름")
+                                                    .type(JsonFieldType.STRING),
+                                PayloadDocumentation.fieldWithPath("confirm")
+                                                    .description("확인여부")
+                                                    .type(JsonFieldType.STRING)
+                            )
+                        )
+                    )
+                    .andDo(print());
+
     }
 }
