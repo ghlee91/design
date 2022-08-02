@@ -13,3 +13,5 @@ endif::[]
 [[Member]]
 == createMember api
 operation::create-member[snippets='http-request,request-fields,curl-request,request-body,http-response,response-body,response-fields']
+== updateMember api
+operation::update-member[snippets='http-request,request-fields,curl-request,request-body,http-response,response-body,response-fields']
