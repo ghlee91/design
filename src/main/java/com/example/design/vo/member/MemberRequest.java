@@ -1,6 +1,5 @@
 package com.example.design.vo.member;
 
-import lombok.Builder;
 import lombok.Data;
 
 @Data
