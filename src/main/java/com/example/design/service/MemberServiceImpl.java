@@ -4,10 +4,12 @@ import com.example.design.domain.GlobalYn;
 import com.example.design.domain.Member;
 import com.example.design.dto.member.MemberDTO;
 import com.example.design.repo.MemberRepo;
+import com.example.design.vo.member.MemberListResponse;
 import com.example.design.vo.member.MemberRequest;
 import com.example.design.vo.member.MemberResponse;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -36,4 +38,20 @@ public class MemberServiceImpl implements MemberService {
 
         return modelMapper.map(memberDTO, MemberResponse.class);
     }
+
+    @Override
+    public MemberListResponse selectAllMember(Pageable pageable) {
+
+        try {
+            MemberListResponse memberListResponse = null;
+            memberListResponse = new MemberListResponse();
+            memberListResponse.setMemberList(memberRepo.findAll(pageable));
+            return memberListResponse;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

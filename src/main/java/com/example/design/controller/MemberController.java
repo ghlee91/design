@@ -1,10 +1,12 @@
 package com.example.design.controller;
 
 import com.example.design.service.MemberServiceImpl;
+import com.example.design.vo.member.MemberListRequest;
 import com.example.design.vo.member.MemberRequest;
 import com.example.design.vo.member.MemberResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,7 @@ public class MemberController {
         System.out.println(memberRequest.getPassword());
         System.out.println(memberRequest.getName());
         System.out.println(memberRequest.getConfirm());
+        System.out.println("ㅎㅎ");
         return "헬로 월드";
     }
 
@@ -37,5 +40,13 @@ public class MemberController {
                              .body(member);
     }
 
+    @GetMapping("/member")
+    public ResponseEntity selectAllMember(MemberListRequest memberListRequest) {
+        log.info("request -> selectAllMember :{}", memberListRequest);
+        PageRequest pageRequest = PageRequest.of(memberListRequest.getPageNumber(), memberListRequest.getPageSize());
+        log.info("{response -> selectAllMember : {}", memberService.selectAllMember(pageRequest));
 
+        return ResponseEntity.status(HttpStatus.OK)
+                             .body(memberService.selectAllMember(pageRequest));
+    }
 }
