@@ -6,15 +6,18 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 
+import com.example.design.DatabaseCleanup;
 import com.example.design.domain.GlobalYn;
 import com.example.design.domain.Member;
 import com.example.design.dto.member.MemberDTO;
 import com.example.design.repo.MemberRepo;
 import com.example.design.vo.member.MemberRequest;
+import com.example.design.vo.member.MemberUpdateRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,6 +47,9 @@ class MemberControllerTest {
     @Autowired
     private MemberRepo memberRepo;
 
+    @Autowired
+    private DatabaseCleanup databaseCleanup;
+
     MediaType MEDIA_TYPE_JSON_UTF8 = new MediaType("application", "json", java.nio.charset.Charset.forName("UTF-8"));
 
     @BeforeEach
@@ -55,7 +61,7 @@ class MemberControllerTest {
                                           preprocessResponse(prettyPrint())))
                                       .build();
 
-        //databaseCleanup.execute();
+        databaseCleanup.execute();
 
         Member member = Member.builder()
                               .name("이기하")
@@ -91,6 +97,50 @@ class MemberControllerTest {
                                 PayloadDocumentation.fieldWithPath("confirm")
                                                     .description("컨펌")
                                                     .type(JsonFieldType.NULL)
+                            ),
+                            PayloadDocumentation.responseFields(
+                                PayloadDocumentation.fieldWithPath("id")
+                                                    .description("아이디")
+                                                    .type(JsonFieldType.NULL),
+                                PayloadDocumentation.fieldWithPath("name")
+                                                    .description("이름")
+                                                    .type(JsonFieldType.STRING),
+                                PayloadDocumentation.fieldWithPath("confirm")
+                                                    .description("확인여부")
+                                                    .type(JsonFieldType.STRING)
+                            )
+                        )
+                    )
+                    .andDo(print());
+    }
+
+    @Test
+    void updateMember() throws Exception {
+        MemberUpdateRequest req = new MemberUpdateRequest();
+        req.setId(1L);
+        req.setPassword("12345");
+
+        String resultPassword = "12345";
+
+        String content = objectMapper.writeValueAsString(req);
+
+        this.mockMvc.perform(put("/api/member").content(content)
+                                               .accept(MEDIA_TYPE_JSON_UTF8)
+                                               .contentType(MEDIA_TYPE_JSON_UTF8))
+                    .andExpect(status().isCreated())
+                    .andExpect(result -> memberRepo.findById(1L)
+                                                   .orElseThrow()
+                                                   .getPassword()
+                                                   .equals(resultPassword))
+                    .andDo(document("{method-name}", preprocessRequest(prettyPrint()),
+                            preprocessResponse(prettyPrint()),
+                            PayloadDocumentation.requestFields(
+                                PayloadDocumentation.fieldWithPath("id")
+                                                    .description("인덱스")
+                                                    .type(JsonFieldType.NUMBER),
+                                PayloadDocumentation.fieldWithPath("password")
+                                                    .description("비번")
+                                                    .type(JsonFieldType.STRING)
                             ),
                             PayloadDocumentation.responseFields(
                                 PayloadDocumentation.fieldWithPath("id")
