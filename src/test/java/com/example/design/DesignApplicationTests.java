@@ -11,35 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class DesignApplicationTests {
-
-    @Autowired
-    private MemberRepo memberRepo;
-
-    @Autowired
-    private FavoriteRepo favoriteRepo;
-
-    @Test
-    void memberTest() {
-        Member member = memberRepo.findById(1L).orElseThrow();
-//        memberRepo.findById()
-        System.out.println(member);
-        System.out.println(member);
-        System.out.println(member);
-        System.out.println(member);
-        System.out.println(member);
-        System.out.println(member);
-
-    }
-
-    @Test
-    void FavoriteTest(){
-        List<Favorite> favorite =  favoriteRepo.findByMemberId(1L);
-
-        System.out.println(favorite);
-
-    }
-
-
     @Test
     void contextLoads() {
 
