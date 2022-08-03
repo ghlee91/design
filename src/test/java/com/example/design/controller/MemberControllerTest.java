@@ -157,4 +157,16 @@ class MemberControllerTest {
                     )
                     .andDo(print());
     }
+
+    @Test
+    void hihi() {
+        Member member = Member.builder()
+                              .name("AA")
+                              .password("1234")
+                              .confirm(GlobalYn.Y)
+                              .build();
+        System.out.println("member 전= " + member);
+        memberRepo.save(member);
+        System.out.println("member 후= " + member);
+    }
 }
