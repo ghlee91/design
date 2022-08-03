@@ -2,6 +2,7 @@ package com.example.design.controller;
 
 import com.example.design.service.MemberServiceImpl;
 import com.example.design.vo.member.MemberListRequest;
+import com.example.design.vo.member.MemberListResponse;
 import com.example.design.vo.member.MemberRequest;
 import com.example.design.vo.member.MemberResponse;
 import com.example.design.vo.member.MemberUpdateRequest;
@@ -51,7 +52,7 @@ public class MemberController {
     }
 
     @GetMapping("/member")
-    public ResponseEntity selectAllMember(MemberListRequest memberListRequest) {
+    public ResponseEntity<MemberListResponse> selectAllMember(MemberListRequest memberListRequest) {
         log.info("request -> selectAllMember :{}", memberListRequest);
         PageRequest pageRequest = PageRequest.of(memberListRequest.getPageNumber(), memberListRequest.getPageSize());
         log.info("{response -> selectAllMember : {}", memberService.selectAllMember(pageRequest));
