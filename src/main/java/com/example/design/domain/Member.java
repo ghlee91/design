@@ -38,5 +38,4 @@ public class Member extends BaseTime {
     @Enumerated(EnumType.STRING)
     @Comment("본인확인 완료여부")
     private GlobalYn confirm;
-
  }
